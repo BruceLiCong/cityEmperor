@@ -82,8 +82,7 @@ public class Grid : MonoBehaviour {
                 levelInfo += "}\n";
             }
         }
-        //System.IO.File.WriteAllText("C:\\Users\\Dante Garcia\\Desktop\\stuff\\myFile.txt", levelInfo);
-        System.IO.File.WriteAllText("myFile.txt", levelInfo);
+        System.IO.File.WriteAllText("levelFile.txt", levelInfo);
     }
     public int getSizeX()
     {
