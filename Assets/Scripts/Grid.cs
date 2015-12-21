@@ -66,6 +66,25 @@ public class Grid : MonoBehaviour {
             return true;
         }
     }
+    public void turnLevelIntoFile()
+    {
+        string levelInfo = "";
+        levelInfo += "Grid: {\nsizeX = " + _sizeX + "\nsizeY = " + _sizeY + "}";
+        for (int i = 0; i < _sizeX; i++)
+        {
+            for (int j = 0; j < _sizeY; j++)
+            {
+                terrainControl temp = _gameGrid[i, j].GetComponent<terrainControl>();
+                levelInfo += "\nterrainTile: {\n";
+                levelInfo += "x = "+i+"\ny = "+j+"\n";
+                levelInfo += "isWater = " + temp.getIsWater() + "\n";
+                levelInfo += "moisture = " + temp.getMoisture() + "\n";
+                levelInfo += "}\n";
+            }
+        }
+        //System.IO.File.WriteAllText("C:\\Users\\Dante Garcia\\Desktop\\stuff\\myFile.txt", levelInfo);
+        System.IO.File.WriteAllText("myFile.txt", levelInfo);
+    }
     public int getSizeX()
     {
         return _sizeX;

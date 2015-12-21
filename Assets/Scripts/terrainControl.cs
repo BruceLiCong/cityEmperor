@@ -20,6 +20,10 @@ public class terrainControl : MonoBehaviour {
         _moisture = 0;
         reRender();
 	}
+    public bool getIsWater()
+    {
+        return _isWater;
+    }
     private void reRender()
     {
         if (!_isWater)
@@ -44,12 +48,15 @@ public class terrainControl : MonoBehaviour {
     }
     public void moisturize(int moisture)
     {
-        _moisture += moisture;
-        if (_moisture >= 2)
+        if (!_isWater)
         {
-            _moisture = 2;
+            _moisture += moisture;
+            if (_moisture >= 2)
+            {
+                _moisture = 2;
+            }
+            reRender();
         }
-        reRender();
     }
     private void moistureAdjacent(int radius, int drySpots)
     {

@@ -28,6 +28,10 @@ public class playerControl : MonoBehaviour {
         {
             gameObject.transform.Translate(Vector3.up * movementFactor);
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Grid.grid.turnLevelIntoFile();
+        }
         //Level Editor Mode
         if (Input.GetKeyDown("l"))
         {
