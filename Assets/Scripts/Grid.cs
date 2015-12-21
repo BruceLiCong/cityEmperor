@@ -29,13 +29,41 @@ public class Grid : MonoBehaviour {
             {
                 for (int j = 0; j < _sizeY; j++)
                 {
-                    _gameGrid[i, j] = (GameObject)Instantiate(terrainPrefab, new Vector3((i * _sizeOfTerrain), (j * _sizeOfTerrain)), new Quaternion());
+                   GameObject temp = (GameObject)Instantiate(terrainPrefab, new Vector3((i * _sizeOfTerrain), (j * _sizeOfTerrain)), new Quaternion());
+                   temp.GetComponent<terrainControl>().setLocation(i, j);
+                   _gameGrid[i, j] = temp;
+
                 }
             }
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+    public GameObject getGridElement(int x, int y)
+    {
+        if (validatePosition(x, y))
+        {
+            return _gameGrid[x, y];
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public bool validatePosition(int x, int y){
+        if (x < 0 || x >= _sizeX)
+        {
+            return false;
+        }
+        else if (y < 0 || y >= _sizeY)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
     public int getSizeX()
