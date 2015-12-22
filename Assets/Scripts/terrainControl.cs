@@ -8,16 +8,14 @@ public class terrainControl : MonoBehaviour {
     public Sprite highMoistureTerrain;
     public Sprite waterTerrain;
 
-    private int _moisture;
+    private int _moisture = 0;
     private int _xLocation;
     private int _yLocation;
-    private bool _isWater;
+    private bool _isWater = false;
     private SpriteRenderer _renderer;
 	// Use this for initialization
 	void Start () {
         _renderer = GetComponent<SpriteRenderer>();
-        _isWater = false;
-        _moisture = 0;
         reRender();
 	}
     public bool getIsWater()
@@ -111,7 +109,14 @@ public class terrainControl : MonoBehaviour {
             moistureAdjacent(15, 4);
         }
     }
-	// Update is called once per frame
+    public void initialize(int x, int y, bool isWater, int moisture)
+    {
+        _xLocation = x;
+        _yLocation = y;
+        _isWater = isWater;
+        _moisture = moisture;
+    }
+    // Update is called once per frame
     //void Update () {
 	
     //}
