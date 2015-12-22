@@ -69,21 +69,55 @@ public class Grid : MonoBehaviour {
     public void turnLevelIntoFile()
     {
         string levelInfo = "";
-        levelInfo += "Grid: {\nsizeX = " + _sizeX + "\nsizeY = " + _sizeY + "}";
+        levelInfo += "{\"x\":" + _sizeX + ",\"y\":" + _sizeY + ",\"terrainTiles\":[";
         for (int i = 0; i < _sizeX; i++)
         {
+            if (i != 0)
+            {
+                levelInfo += ",";
+            }
             for (int j = 0; j < _sizeY; j++)
             {
                 terrainControl temp = _gameGrid[i, j].GetComponent<terrainControl>();
-                levelInfo += "\nterrainTile: {\n";
-                levelInfo += "x = "+i+"\ny = "+j+"\n";
-                levelInfo += "isWater = " + temp.getIsWater() + "\n";
-                levelInfo += "moisture = " + temp.getMoisture() + "\n";
-                levelInfo += "}\n";
+                if (j != 0)
+                {
+                    levelInfo += ",";
+                }
+                levelInfo += "{";
+                levelInfo += "\"x\":"+i+",\"y\":"+j+",";
+                levelInfo += "\"isWater\":";
+                if (temp.getIsWater())
+                {
+                    levelInfo += "true";
+                }
+                else
+                {
+                    levelInfo += "false";
+                }
+                levelInfo += ",\"moisture\":" + temp.getMoisture()+"}";
             }
         }
+        levelInfo += "]}";
         System.IO.File.WriteAllText("levelFile.txt", levelInfo);
     }
+    //public void readLevel()
+    //{
+    //    int xSize;
+    //    int ySize;
+
+
+    //    string levelInfo = System.IO.File.ReadAllText("levelFile.txt");
+    //    JSONObject json = new JSONObject(levelInfo);
+    //    xSize = (int)json["x"].n;
+    //    ySize = (int)json["y"].n;
+
+    //    if(json["terrainTiles"].list.ToArray().Length != 0){
+    //        foreach (JSONObject tile in json["terrainTiles"].list)
+    //        {
+    //            Debug.Log(tile["x"].n + ", " + tile["y"].n + ", " + tile["isWater"].b + ", " + tile["moisture"].n);
+    //        }
+    //    }
+    //}
     public int getSizeX()
     {
         return _sizeX;

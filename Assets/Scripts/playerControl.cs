@@ -32,18 +32,23 @@ public class playerControl : MonoBehaviour {
         {
             Grid.grid.turnLevelIntoFile();
         }
+        //if (Input.GetKeyDown("j"))
+        //{
+            //Grid.grid.readLevel();
+        //}
         //Level Editor Mode
         if (Input.GetKeyDown("l"))
         {
             _levelEditor = !_levelEditor;
         }
-        if (_levelEditor)
+        
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (_levelEditor)
             {
                 checkCollision();
-            } 
-        }
+            }    
+        } 
 	}
     private void centerCamera()
     {
